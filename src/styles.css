@@ -22,3 +22,426 @@
 @media(max-width:700px){.footer{padding:42px 6% 20px}.footer-main{gap:28px 18px}.footer-bottom{flex-direction:column;align-items:flex-start}}
 @media(max-width:440px){.footer-main{grid-template-columns:1fr;gap:25px}.footer-summary{grid-column:auto}.footer-bottom{font-size:9px}}
 .demo-contact a:hover{color:var(--red)}
+
+/* ==========================================
+   WHY VIGOR SIGHT - CONNECTED BENEFITS
+========================================== */
+
+.why-platform {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 100px 8.5% 65px;
+  color: var(--navy);
+}
+
+/* Header */
+
+.why-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 65px;
+}
+
+.why-header .section-kicker {
+  justify-content: center;
+}
+
+.why-header h2 {
+  font: 700 clamp(32px, 3.5vw, 46px)/1.2
+    'Manrope', sans-serif;
+  letter-spacing: -1.7px;
+  margin: 25px 0 16px;
+  color: var(--navy);
+}
+
+.why-header h2 em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.why-header > p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #687789;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Main diagram */
+
+.why-diagram {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 55px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Platform illustration */
+
+.why-platform-visual {
+  height: 440px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-orbit {
+  position: absolute;
+  border: 1px solid #dbe3ed;
+  transform: rotate(45deg);
+  border-radius: 32px;
+}
+
+.orbit-one {
+  width: 265px;
+  height: 265px;
+  border-color: #cbd7e5;
+}
+
+.orbit-two {
+  width: 220px;
+  height: 220px;
+  border-color: #dce3eb;
+}
+
+.orbit-three {
+  width: 310px;
+  height: 310px;
+  border-color: #e9edf2;
+}
+
+.why-platform-core {
+  position: relative;
+  z-index: 2;
+  width: 215px;
+  height: 215px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #0b1d32, #173b60);
+  box-shadow:
+    0 0 0 12px #eaf0f6,
+    0 20px 55px #102a4525;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.why-core-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff17;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.why-brand-name {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #c5d5e6;
+  font-weight: 600;
+}
+
+.why-platform-core strong {
+  font: 800 27px 'Manrope', sans-serif;
+  letter-spacing: 3px;
+  margin-top: 1px;
+}
+
+.why-platform-core small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #aebfd1;
+  margin-top: 6px;
+}
+
+.why-platform-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #7d8a99;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.why-live-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #25966b;
+}
+
+/* Benefits */
+
+.why-benefits {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.why-benefit {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 25px;
+  min-height: 145px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Diamond icons */
+
+.why-diamond-wrap {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(45deg);
+  position: relative;
+}
+
+.why-diamond {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--red);
+  box-shadow: 0 8px 25px #c9252c22;
+}
+
+.why-diamond-inner {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--red);
+  transform: rotate(-45deg);
+}
+
+.why-navy .why-diamond {
+  background: #555d67;
+  box-shadow: 0 8px 25px #14233718;
+}
+
+.why-navy .why-diamond-inner {
+  color: var(--navy);
+}
+
+.why-blue .why-diamond {
+  background: #1766bd;
+  box-shadow: 0 8px 25px #1766bd22;
+}
+
+.why-blue .why-diamond-inner {
+  color: #1766bd;
+}
+
+/* Benefit descriptions */
+
+.why-benefit-copy {
+  max-width: 410px;
+}
+
+.why-number {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #8995a2;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.why-benefit h3 {
+  font: 750 19px/1.35 'Manrope', sans-serif;
+  margin: 0 0 9px;
+  color: var(--red);
+}
+
+.why-navy h3 {
+  color: var(--navy);
+}
+
+.why-blue h3 {
+  color: #1766bd;
+}
+
+.why-benefit p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #687789;
+  margin: 0;
+}
+
+/* Connecting line */
+
+.why-connector-line {
+  position: absolute;
+  left: -75px;
+  top: 50%;
+  width: 95px;
+  height: 1px;
+  background: #cbd5e0;
+  z-index: -1;
+}
+
+/* Footer strip */
+
+.why-bottom-note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
+  margin: 45px auto 0;
+  padding-top: 23px;
+  border-top: 1px solid #e6eaf0;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: #7d8a99;
+}
+
+.why-bottom-note svg {
+  color: var(--red);
+}
+
+/* Tablet */
+
+@media(max-width: 1000px) {
+  .why-platform {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .why-diagram {
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 25px;
+  }
+
+  .why-benefit {
+    grid-template-columns: 110px 1fr;
+    gap: 15px;
+  }
+
+  .why-diamond-wrap {
+    transform: rotate(45deg) scale(.82);
+  }
+}
+
+/* Mobile */
+
+@media(max-width: 700px) {
+  .why-platform {
+    padding: 70px 6% 45px;
+  }
+
+  .why-header {
+    margin-bottom: 40px;
+  }
+
+  .why-header h2 {
+    font-size: 33px;
+    letter-spacing: -1.2px;
+  }
+
+  .why-diagram {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .why-platform-visual {
+    height: 300px;
+  }
+
+  .why-orbit.orbit-three {
+    width: 240px;
+    height: 240px;
+  }
+
+  .why-orbit.orbit-one {
+    width: 205px;
+    height: 205px;
+  }
+
+  .why-orbit.orbit-two {
+    width: 165px;
+    height: 165px;
+  }
+
+  .why-platform-core {
+    width: 165px;
+    height: 165px;
+  }
+
+  .why-core-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .why-platform-core strong {
+    font-size: 22px;
+  }
+
+  .why-benefits {
+    gap: 20px;
+  }
+
+  .why-benefit {
+    grid-template-columns: 105px 1fr;
+    gap: 14px;
+    min-height: 120px;
+  }
+
+  .why-diamond-wrap {
+    width: 100px;
+    height: 100px;
+    transform: rotate(45deg) scale(.8);
+  }
+
+  .why-diamond {
+    width: 85px;
+    height: 85px;
+  }
+
+  .why-diamond-inner {
+    width: 62px;
+    height: 62px;
+  }
+
+  .why-benefit h3 {
+    font-size: 15px;
+  }
+
+  .why-benefit p {
+    font-size: 11px;
+  }
+
+  .why-connector-line {
+    display: none;
+  }
+
+  .why-bottom-note {
+    font-size: 8px;
+    line-height: 1.7;
+    text-align: center;
+  }
+}
