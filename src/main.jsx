@@ -60,6 +60,120 @@ function IndustriesPage()
   return <PageHero eyebrow="APPLICATIONS & INDUSTRIES" title="Security requirements" accent="are site-specific." desc="Explore how a common video intelligence platform may be configured for different physical environments. These are application scenarios, not claims of completed deployments." number="04"><section className="page-section"><div className="industry-detail-grid">{industries.map((item, i) => { const Icon = item.icon; return <article className="industry-detail" key={item.name}><div className="industry-detail-top"><Icon size={27} /><span>APPLICATION / 0{i + 1}</span></div><h2>{item.name}</h2><p>{item.text}</p><div className="industry-use"><b>Potential use</b><p>{item.use}</p></div></article> })}</div></section><section className="page-band"><div><BriefcaseBusiness size={27} /><h2>Every site needs a different operating plan.</h2><p>Camera positions, lighting, network conditions, operating procedures and response ownership shape the deployment design.</p></div><a className="btn primary" href="/demo">Plan a site assessment <ArrowRight size={16} /></a></section></PageHero> }
 function PerformancePage() { return <PageHero eyebrow="PERFORMANCE & RELIABILITY" title="Evidence before" accent="performance claims." desc="Security systems must be evaluated in real operating conditions. We will publish measured results only when test methodology, hardware and operating conditions can be disclosed." number="05"><section className="page-section"><ValidationPanel /><div className="validation-method"><h2 className="subheading">What a credible test report should contain</h2><div className="method-grid">{[[Gauge, 'Detection metrics', 'Precision, recall, class-wise performance, sample size and confidence thresholds.'], [Activity, 'False alerts', 'False positives per camera-hour, event category and environmental condition.'], [Cpu, 'Processing latency', 'End-to-end latency, stream resolution, FPS, concurrent camera count and hardware.'], [CalendarDays, 'Reliability', 'Soak-test duration, restarts, dropped frames, recovery behaviour and service availability.'], [ScanSearch, 'Test environment', 'Camera models, lens, lighting, scene density, network conditions and model versions.'], [ShieldCheck, 'Independent assessment', 'Certification or third-party validation only where a relevant certificate or report has actually been obtained.']].map(([Icon, title, desc]) => <article className="method-card" key={title}><Icon size={23} /><h3>{title}</h3><p>{desc}</p></article>)}</div></div><PageCallout title="No invented benchmarks" text="The website intentionally does not display numerical accuracy, latency, uptime or false-positive claims until repeatable tests support them. This protects customers and the product's credibility." /></section></PageHero> }
 function ResourcesPage() { return <PageHero eyebrow="RESOURCES" title="Product information" accent="for technical teams." desc="Reference material for organisations evaluating Vigor Sight. Documentation will expand as supported configurations and integration specifications are finalised." number="06"><section className="page-section"><div className="resource-grid"><ResourceCard icon={FileText} title="Product overview" text="A concise introduction to the platform, intended capabilities and deployment approach." action="Open product overview" href="/vigor-sight-product-overview.pdf" /><ResourceCard icon={Network} title="System architecture" text="Review the main video ingestion, analytics, event, evidence and operator workflow layers." action="View technology page" href="/technology" /><ResourceCard icon={BookOpen} title="Integration guidance" text="ONVIF and RTSP are part of the integration approach. Device compatibility is assessed individually." action="Discuss compatibility" href="/demo" /><ResourceCard icon={ShieldCheck} title="Security & privacy" text="Deployment governance topics include access control, retention, network boundaries and auditability." action="Discuss security requirements" href="/demo" /></div><div className="resource-note"><CircleHelp size={20} /><div><b>Looking for API documentation or hardware specifications?</b><p>These materials are not published as final specifications yet. Contact the team with your intended camera count, models and integration requirements.</p></div></div></section></PageHero> }
+
+function WhyUseSection() {
+  const benefits = [
+    {
+      number: "01",
+      icon: Gauge,
+      title: "Extend Existing Infrastructure",
+      text: "Build on compatible IP cameras and NVRs, adding an intelligence layer without automatically replacing your existing surveillance infrastructure.",
+      color: "red"
+    },
+    {
+      number: "02",
+      icon: Network,
+      title: "Unify Security Operations",
+      text: "Connect video analytics, event validation, evidence records and configured alerts through one integrated operational workflow.",
+      color: "navy"
+    },
+    {
+      number: "03",
+      icon: ShieldCheck,
+      title: "Enable Evidence-Led Decisions",
+      text: "Give security teams event context and relevant footage to review, verify and make better-informed operational decisions.",
+      color: "blue"
+    }
+  ];
+
+  return (
+    <section className="why-platform" id="why-vigor-sight">
+      <div className="why-header">
+        <div className="section-kicker">
+          THE VIGOR SIGHT ADVANTAGE <span>/ 02</span>
+        </div>
+
+        <h2>
+          Transform video surveillance with{" "}
+          <em>intelligent security operations</em>
+        </h2>
+
+        <p>
+          Bringing existing infrastructure, AI-powered video analytics
+          and human-led security workflows together through one
+          unified platform.
+        </p>
+      </div>
+
+      <div className="why-diagram">
+
+        {/* Central platform illustration */}
+        <div className="why-platform-visual">
+          <div className="why-orbit orbit-one"></div>
+          <div className="why-orbit orbit-two"></div>
+          <div className="why-orbit orbit-three"></div>
+
+          <div className="why-platform-core">
+            <div className="why-core-icon">
+              <Eye size={37} strokeWidth={1.6} />
+            </div>
+            <span className="why-brand-name">VIGOR</span>
+            <strong>SIGHT</strong>
+            <small>VIDEO INTELLIGENCE</small>
+          </div>
+
+          <div className="why-platform-caption">
+            <span className="why-live-indicator"></span>
+            INTELLIGENT VIDEO PLATFORM
+          </div>
+        </div>
+
+        {/* Connected benefits */}
+        <div className="why-benefits">
+
+          <div className="why-connector-line"></div>
+
+          {benefits.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <article
+                className={`why-benefit why-${item.color}`}
+                key={item.number}
+              >
+                <div className="why-diamond-wrap">
+                  <div className="why-diamond">
+                    <div className="why-diamond-inner">
+                      <Icon size={37} strokeWidth={1.8} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="why-benefit-copy">
+                  <span className="why-number">
+                    CAPABILITY / {item.number}
+                  </span>
+
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            );
+          })}
+
+        </div>
+      </div>
+
+      <div className="why-bottom-note">
+        <Network size={17} />
+        <span>
+          ONE CONNECTED PLATFORM. A MORE INFORMED SECURITY OPERATION.
+        </span>
+      </div>
+    </section>
+  );
+}
+
 function ResourceCard({ icon: Icon, title, text, action, href }) { return <article className="resource-card"><Icon size={26} /><h3>{title}</h3><p>{text}</p><a className="text-link" href={href}>{action} <ArrowUpRight size={15} /></a></article> }
 function AboutPage() { return <PageHero eyebrow="About Vigor Sight" title="Practical intelligence" accent="for physical security." desc="Vigor Sight is a product initiative of Vigor Technologies, focused on making existing video infrastructure more useful through analytics, event workflows and evidence-led review." number="07"><section className="page-section about-layout"><div><h2 className="subheading">The problem we are working on</h2><p className="long-copy">Organisations invest in cameras and recording systems, but reviewing footage across many feeds can be time-consuming. Events may be noticed late, and finding the relevant clip can require manual effort. Vigor Sight is being developed to add a software intelligence layer to compatible surveillance infrastructure.</p><h2 className="subheading">Our product principles</h2><div className="principles">{[[ShieldCheck, 'Reliability over spectacle', 'Measure performance in the environment where the system will be used.'], [Eye, 'Human oversight', 'Make detections reviewable and keep consequential decisions with authorised people.'], [Network, 'Interoperability', 'Work with existing infrastructure where compatibility can be established.'], [LockKeyhole, 'Responsible deployment', 'Treat video, identity data and evidence as sensitive operational information.']].map(([Icon, t, d]) => <div className="principle" key={t}><Icon /><div><b>{t}</b><p>{d}</p></div></div>)}</div></div><img className="about-image" src="/assets/manufacturing-ai.png" alt="Industrial automation and manufacturing intelligence" /></section><section className="page-band"><div><h2>Building for real operating environments.</h2><p>We welcome conversations with industrial operators, system integrators and organisations evaluating video analytics.</p></div><a className="btn primary" href="/demo">Contact the team <ArrowRight size={16} /></a></section></PageHero> }
 function DemoPage() {
