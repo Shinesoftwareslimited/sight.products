@@ -178,25 +178,90 @@ function ResourceCard({ icon: Icon, title, text, action, href }) { return <artic
 function AboutPage() { return <PageHero eyebrow="About Vigor Sight" title="Practical intelligence" accent="for physical security." desc="Vigor Sight is a product initiative of Vigor Technologies, focused on making existing video infrastructure more useful through analytics, event workflows and evidence-led review." number="07"><section className="page-section about-layout"><div><h2 className="subheading">The problem we are working on</h2><p className="long-copy">Organisations invest in cameras and recording systems, but reviewing footage across many feeds can be time-consuming. Events may be noticed late, and finding the relevant clip can require manual effort. Vigor Sight is being developed to add a software intelligence layer to compatible surveillance infrastructure.</p><h2 className="subheading">Our product principles</h2><div className="principles">{[[ShieldCheck, 'Reliability over spectacle', 'Measure performance in the environment where the system will be used.'], [Eye, 'Human oversight', 'Make detections reviewable and keep consequential decisions with authorised people.'], [Network, 'Interoperability', 'Work with existing infrastructure where compatibility can be established.'], [LockKeyhole, 'Responsible deployment', 'Treat video, identity data and evidence as sensitive operational information.']].map(([Icon, t, d]) => <div className="principle" key={t}><Icon /><div><b>{t}</b><p>{d}</p></div></div>)}</div></div><img className="about-image" src="/assets/manufacturing-ai.png" alt="Industrial automation and manufacturing intelligence" /></section><section className="page-band"><div><h2>Building for real operating environments.</h2><p>We welcome conversations with industrial operators, system integrators and organisations evaluating video analytics.</p></div><a className="btn primary" href="/demo">Contact the team <ArrowRight size={16} /></a></section></PageHero> }
 function DemoPage() {
   const [form, setForm] = useState({ name: '', designation: '', organisation: '', email: '', phone: '', deployment: '', cameras: '', date: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+
   const update = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Vigor Sight demo request - ${form.organisation}`);
-    const body = encodeURIComponent([
-      `Name: ${form.name}`,
-      `Designation: ${form.designation || 'Not provided'}`,
-      `Organisation: ${form.organisation}`,
-      `Business email: ${form.email}`,
-      `Phone: ${form.phone || 'Not provided'}`,
-      `Number of cameras / devices: ${form.cameras || 'Not provided'}`,
-      `Preferred demonstration date: ${form.date || 'Not provided'}`,
-      '',
-      'Deployment requirements:',
-      form.deployment || 'Not provided',
-    ].join('\n'));
-    window.location.href = `mailto:abhishek.tiwari0253@gmail.com?subject=${subject}&body=${body}`;
+    setSubmitting(true);
+    setStatusMessage(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatusMessage({ type: 'success', text: 'Demo request sent successfully! We will get back to you shortly.' });
+        setForm({ name: '', designation: '', organisation: '', email: '', phone: '', deployment: '', cameras: '', date: '' });
+      } else {
+        setStatusMessage({ type: 'error', text: result.error || 'Failed to send request. Please try again later.' });
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      setStatusMessage({ type: 'error', text: 'Network error. Please check your connection and try again.' });
+    } finally {
+      setSubmitting(false);
+    }
   };
-  return <PageHero eyebrow="REQUEST A DEMONSTRATION" title="Let's understand" accent="your environment." desc="Tell us about your organisation, camera infrastructure and deployment goals. Submitting opens your default email app with your enquiry prepared for review." number="08"><section className="page-section demo-page"><div className="demo-aside"><h2 className="subheading">A useful first discussion</h2><p>To scope a relevant demonstration, it helps to know:</p><ul><li>Camera and NVR make and model</li><li>Number of concurrent video streams</li><li>Site type and operating conditions</li><li>Key events or workflows to evaluate</li><li>Network and data-residency constraints</li></ul><div className="demo-contact"><div><Mail size={17} /><a href="mailto:abhishek.tiwari0253@gmail.com">abhishek.tiwari0253@gmail.com</a></div><div><MapPin size={17} /><span>Vigor Technologies · India</span></div></div></div><div className="form-wrap"><form onSubmit={handleSubmit}><div className="form-title"><span>DEMONSTRATION ENQUIRY</span><b>Tell us what you need.</b></div><div className="form-grid"><label>Full name *<input required name="name" value={form.name} onChange={update} placeholder="Your name" /></label><label>Designation<input name="designation" value={form.designation} onChange={update} placeholder="Your role" /></label><label>Organisation *<input required name="organisation" value={form.organisation} onChange={update} placeholder="Company / organisation" /></label><label>Business email *<input required type="email" name="email" value={form.email} onChange={update} placeholder="name@company.com" /></label><label>Phone number<input name="phone" value={form.phone} onChange={update} placeholder="+91" /></label><label>Number of cameras / devices<select name="cameras" value={form.cameras} onChange={update}><option value="">Select range</option><option>1–16</option><option>17–64</option><option>65–128</option><option>129–500</option><option>500+</option><option>Not sure yet</option></select></label><label className="full">Deployment requirements<textarea name="deployment" value={form.deployment} onChange={update} rows="4" placeholder="Site type, camera/NVR setup, key use cases and constraints…" /></label><label>Preferred demonstration date<input type="date" name="date" value={form.date} onChange={update} min={new Date().toISOString().slice(0, 10)} /></label></div><button className="btn primary submit-btn" type="submit">Prepare demo request <ArrowRight size={17} /></button><p className="form-privacy">This opens your default email app; review the prepared message and send it from there.</p></form></div></section></PageHero>;
+
+  return (
+    <PageHero eyebrow="REQUEST A DEMONSTRATION" title="Let's understand" accent="your environment." desc="Tell us about your organisation, camera infrastructure and deployment goals." number="08">
+      <section className="page-section demo-page">
+        <div className="demo-aside">
+          <h2 className="subheading">A useful first discussion</h2>
+          <p>To scope a relevant demonstration, it helps to know:</p>
+          <ul>
+            <li>Camera and NVR make and model</li>
+            <li>Number of concurrent video streams</li>
+            <li>Site type and operating conditions</li>
+            <li>Key events or workflows to evaluate</li>
+            <li>Network and data-residency constraints</li>
+          </ul>
+          <div className="demo-contact">
+            <div><Mail size={17} /><a href="mailto:abhishek.tiwari0253@gmail.com">abhishek.tiwari0253@gmail.com</a></div>
+            <div><MapPin size={17} /><span>Vigor Technologies · India</span></div>
+          </div>
+        </div>
+        <div className="form-wrap">
+          <form onSubmit={handleSubmit}>
+            <div className="form-title">
+              <span>DEMONSTRATION ENQUIRY</span>
+              <b>Tell us what you need.</b>
+            </div>
+
+            {statusMessage && (
+              <div style={{ padding: '0.85rem 1rem', marginBottom: '1rem', borderRadius: '4px', fontSize: '0.9rem', background: statusMessage.type === 'success' ? '#e6f4ea' : '#fce8e6', color: statusMessage.type === 'success' ? '#137333' : '#c5221f', border: `1px solid ${statusMessage.type === 'success' ? '#ceead6' : '#fad2cf'}` }}>
+                {statusMessage.text}
+              </div>
+            )}
+
+            <div className="form-grid">
+              <label>Full name *<input required name="name" value={form.name} onChange={update} placeholder="Your name" /></label>
+              <label>Designation<input name="designation" value={form.designation} onChange={update} placeholder="Your role" /></label>
+              <label>Organisation *<input required name="organisation" value={form.organisation} onChange={update} placeholder="Company / organisation" /></label>
+              <label>Business email *<input required type="email" name="email" value={form.email} onChange={update} placeholder="name@company.com" /></label>
+              <label>Phone number<input name="phone" value={form.phone} onChange={update} placeholder="+91" /></label>
+              <label>Number of cameras / devices<select name="cameras" value={form.cameras} onChange={update}><option value="">Select range</option><option>1–16</option><option>17–64</option><option>65–128</option><option>129–500</option><option>500+</option><option>Not sure yet</option></select></label>
+              <label className="full">Deployment requirements<textarea name="deployment" value={form.deployment} onChange={update} rows="4" placeholder="Site type, camera/NVR setup, key use cases and constraints…" /></label>
+              <label>Preferred demonstration date<input type="date" name="date" value={form.date} onChange={update} min={new Date().toISOString().slice(0, 10)} /></label>
+            </div>
+            
+            <button className="btn primary submit-btn" type="submit" disabled={submitting}>
+              {submitting ? 'Sending Request...' : <>Submit demo request <ArrowRight size={17} /></>}
+            </button>
+            <p className="form-privacy">Your information is secure and used strictly for scheduling your custom system demonstration.</p>
+          </form>
+        </div>
+      </section>
+    </PageHero>
+  );
 }
 function PageCallout({ title, text }) { return <div className="page-callout"><ShieldCheck size={22} /><div><b>{title}</b><p>{text}</p></div></div> }
 function NotFound() { return <PageHero eyebrow="PAGE NOT FOUND" title="This page isn't" accent="available." desc="The address may have changed. Use the navigation to return to the product website."><section className="page-section"><a className="btn primary" href="/">Return to overview <ArrowRight size={16} /></a></section></PageHero> }
